@@ -1,0 +1,29 @@
+[
+    {
+      "name": "Tech com",
+      "id": "tech101",
+      "img_url":"/img/com-logo-1.jpg", 
+      "description": "Required an inter as Frontend developer"
+    },
+    {
+      "name": "International Hearts",
+      "id": "tech102",
+      "img_url":"/img/com-logo-2.jpg", 
+      "description": "Required an inter as Frontend developer"
+    },
+    {
+      "name": "Data xchange",
+      "id": "tech103",
+      "img_url":"/img/com-logo-3.jpg", 
+      "description": "Required an inter as Frontend developer"
+    },
+    {
+      "name": "Fuzion",
+      "id": "fuzion101",
+      "img_url":"/img/com-logo-4.jpg", 
+      "description": "Required an inter as Frontend developer"
+    }
+    
+
+  ]
+  

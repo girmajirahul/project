@@ -1,0 +1,23 @@
+[
+    {
+      "name": "Rahul Girmaji",
+      "id": "101",
+      "image":"candidate1.jpg", 
+      "skills": "Frontend Developer",
+      "website":"/pdf/Rahul_Girmaji.pdf"
+    },
+    {
+      "name": "Mosin Balsing",
+      "id": "102",
+      "image":"candidate2.jpg", 
+      "skills": "An Frontend Developer",
+      "website":"/pdf/Mosin_Balsing.pdf"
+    },
+    {
+      "name": "Dayanand Jagtap",
+      "id": "103",
+      "image":"candidate3.jpg", 
+      "skills": "An Frontend Developer",
+      "website":"/pdf/Dayanand_Jagtap.pdf"
+    }
+]    
