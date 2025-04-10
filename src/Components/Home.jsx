@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import image from '../assets/image1.jpg';
 import Card from './Card';
+import jobsData from "../api/jobs.json" ;
 import { FaWhatsapp } from "react-icons/fa";
 import { useEffect } from 'react';
 
@@ -81,7 +82,20 @@ const filteredJobs = jobs.filter((job) =>
               ))
             ) : (
               <div className="text-center">
-                <p className=" text-red-500 ">No jobs available</p>
+                {/* <p className=" text-red-500 ">No jobs available</p> */}
+                <div className="flex justify-center gap-6 flex-wrap">
+                    {/* <img src={placeholder1} alt="placeholder1" className="w-60 h-50 object-cover rounded-lg shadow-md" /> */}
+                    {jobsData.map((job)=>(
+                      <div key={job.id}>
+                        <img src={job.img_url} alt={`job.name`} className="w-60 h-50 object-cover rounded-lg shadow-md" />
+
+                      </div>
+                    ))}
+                    <div>
+                    <a className="inline-block bg-blue-500 text-white py-3 px-5 mt-3 rounded-lg hover:bg-blue-600 transition" href="">Check More</a>
+
+                    </div>
+                  </div>
               </div>
             )}
           </ul>
