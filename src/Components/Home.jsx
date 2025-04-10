@@ -81,7 +81,7 @@ const filteredJobs = jobs.filter((job) =>
                 </li>
               ))
             ) : (
-              <div className="text-center">
+              <div className="flex flex-wrap justify-center">
                 {/* <p className=" text-red-500 ">No jobs available</p> */}
                 <div className="flex justify-center gap-6 flex-wrap">
                     {/* <img src={placeholder1} alt="placeholder1" className="w-60 h-50 object-cover rounded-lg shadow-md" /> */}
@@ -91,11 +91,10 @@ const filteredJobs = jobs.filter((job) =>
 
                       </div>
                     ))}
-                    <div>
-                    <a className="inline-block bg-blue-500 text-white py-3 px-5 mt-3 rounded-lg hover:bg-blue-600 transition" href="">Check More</a>
-
-                    </div>
-                  </div>
+                </div>
+                <div className='items-center'>
+                  <a className="inline-block bg-blue-500 text-white py-3 px-5 mt-3 rounded-lg hover:bg-blue-600 transition" href="">Check More</a>
+                </div>
               </div>
             )}
           </ul>
