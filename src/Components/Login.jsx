@@ -31,7 +31,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8081/signup", values)
+      .post("http://localhost:8081/users/signup", values)
       .then(() => alert("Registered Successfully!"))
       .catch((err) => console.log(err));
   };

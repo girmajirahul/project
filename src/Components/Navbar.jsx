@@ -35,13 +35,13 @@ export default function Navbar() {
       <div className={`md:flex md:items-center md:gap-6 ${menuOpen ? 'block' : 'hidden'} absolute md:static top-16 left-0 w-full md:w-auto bg-white shadow-md md:shadow-none p-4 md:p-0` }>
         <ul className="flex flex-col md:flex-row gap-4 text-sm">
           <li className="cursor-pointer hover:text-sky-500"><a href="/">HOME</a></li>
-          <li className="cursor-pointer hover:text-sky-500"><a href="/">CONTACT</a></li>
           <li className="cursor-pointer hover:text-sky-500"><a href="/About">ABOUT</a></li>
           <li className="cursor-pointer hover:text-sky-500"><a href="/Candidates">CANDIDATES</a></li>
+          <li className="cursor-pointer hover:text-sky-500"><a href="/admin/login">Admin</a></li>
           <li>
             {user ? (
               <div className="flex flex-col md:flex-row items-center gap-4">
-                <span className="cursor-pointer text-blue-500">Welcome, {user.name}!</span>
+                <a href={`/profile/${user.id}`} className="cursor-pointer text-blue-500">Welcome, {user.name}!</a>
                 <button
                   onClick={handleLogout}
                   className="bg-red-500 px-3 py-1 text-white rounded-md"
