@@ -8,26 +8,30 @@ export default function Card({ data, type }) {
 
   return (
     <div className="ml-20 rounded-lg shadow-2xl overflow-hidden p-7">
-      <div className="flex flex-col items-center">
-        <img src={`/img/${image}`} alt={name} className="h-40 w-40 object-cover rounded-full" />
-        <h2 className="mt-2 text-lg font-semibold text-center">{name}</h2>
-        
-      </div>
      
-
-      {type === "job" && (
-        <div className="mt-3">
-          
+     {type==="candidate" &&(
+        <>
+          <div className="flex flex-col items-center">
+           <img src={`img/${image}`} alt={name} className="h-40 w-40 object-cover rounded-full" />
+           <h2 className="mt-2 text-lg font-semibold text-center">{name}</h2>
+          </div>
+          <div className="mt-3">
+          <p><strong>Skills:</strong> {data.skills}</p>
+        </div>
+        </>   
+      )}
+      {type==="job" &&(
+        <>
+          <div className="flex flex-col items-center">
+           <img src={`http://localhost:8081/uploads/${image}`} alt={name} className="h-40 w-40 object-cover rounded-full" />
+           <h2 className="mt-2 text-lg font-semibold text-center">{name}</h2>
+          </div>
+          <div className="mt-3">
           <p><strong>Post:</strong> {data.post}</p>
           <p><strong>Location:</strong> {data.location}</p>
+          <p><strong>website:</strong> {data.website}</p>
         </div>
-      )}
-
-      {type === "candidate" && (
-        <div className="mt-3">
-          <p><strong>Skills:</strong> {data.skills}</p>
-          
-        </div>
+          </>  
       )}
 
       {website && (
