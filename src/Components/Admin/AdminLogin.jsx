@@ -77,6 +77,7 @@ export default function AdminLogin() {
                     >Login</button>
                 </div>
             </form>
+            <div className='mt-2 text-center hover:text-blue-400'><a href="/">Back to Home</a></div>
       </div>
     </div>
   )

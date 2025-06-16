@@ -9,6 +9,7 @@ import Candidates from "./Components/Candidates";
 import Profile from "./Components/Profile";
 import AdminLogin from "./Components/Admin/AdminLogin";
 import Dashboard from "./Components/Admin/Dasboard";
+import CandidateProfile from "./Components/CandidateProfile";
 
 const App = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/Candidates" element={<Candidates />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/Candidate/profile/:id" element={<CandidateProfile />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dasboard" element={<Dashboard />} />
       </Routes>

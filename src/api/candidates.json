@@ -3,21 +3,40 @@
       "name": "Rahul Girmaji",
       "id": "101",
       "image":"candidate1.jpg", 
-      "skills": "Frontend Developer",
+      "email":"rahulgirmji@gmail.com",
+      "age":22,
+      "phone":"9021710342",
+      "role":"Front End Developer",
+      "description":"",
+      "skills": ["Java ","ReactJS ","JavaScript ","Python","Mysql","MongoDB"],
+      "location":"Pune",
       "website":"/pdf/Rahul_Girmaji.pdf"
+     
     },
     {
       "name": "Mosin Balsing",
       "id": "102",
       "image":"candidate2.jpg", 
-      "skills": "An Frontend Developer",
+      "email":"mosinbalsing@gmail.com",
+      "age":23,
+      "phone":"1234567890",
+       "role":"Full Stack Developer",
+      "description":"",
+      "skills": ["ReactJS ","NodeJS ","Java ","Python ","MongoDB"],
+      "location":"Pune",
       "website":"/pdf/Mosin_Balsing.pdf"
     },
     {
       "name": "Dayanand Jagtap",
       "id": "103",
       "image":"candidate3.jpg", 
-      "skills": "An Frontend Developer",
+      "email":"jagtapdayanand@gmail.com",
+      "age":22,
+      "phone":"9876543211",
+       "role":"Software Engineer",
+      "description":"",
+      "skills": ["NodeJS ","ReactJS ","Python "],
+      "location":"Pune",
       "website":"/pdf/Dayanand_Jagtap.pdf"
     }
 ]    

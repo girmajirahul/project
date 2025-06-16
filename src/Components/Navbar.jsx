@@ -33,7 +33,7 @@ export default function Navbar() {
       
       {/* Navigation Links */}
       <div className={`md:flex md:items-center md:gap-6 ${menuOpen ? 'block' : 'hidden'} absolute md:static top-16 left-0 w-full md:w-auto bg-white shadow-md md:shadow-none p-4 md:p-0` }>
-        <ul className="flex flex-col md:flex-row gap-4 text-sm">
+        <ul className="flex flex-col md:flex-row gap-4 font-serif text-sm">
           <li className="cursor-pointer hover:text-sky-500"><a href="/">HOME</a></li>
           <li className="cursor-pointer hover:text-sky-500"><a href="/About">ABOUT</a></li>
           <li className="cursor-pointer hover:text-sky-500"><a href="/Candidates">CANDIDATES</a></li>
