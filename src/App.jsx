@@ -10,6 +10,9 @@ import Profile from "./Components/Profile";
 import AdminLogin from "./Components/Admin/AdminLogin";
 import Dashboard from "./Components/Admin/Dasboard";
 import CandidateProfile from "./Components/CandidateProfile";
+import Carasuol from "./Components/Carasuol";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const App = () => {
   const location = useLocation();
@@ -17,7 +20,7 @@ const App = () => {
   return (
     <>
      {!hideLayout && <Navbar />}
-      
+     
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
@@ -26,7 +29,7 @@ const App = () => {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/Candidate/profile/:id" element={<CandidateProfile />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dasboard" element={<Dashboard />} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
       </Routes>
 
       {!hideLayout && <Footer />}

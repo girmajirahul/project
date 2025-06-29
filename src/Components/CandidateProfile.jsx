@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import candidates from '../api/candidates.json'; // adjust path if needed
+import candidates from '../api/candidates.json';
 import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaDollarSign } from 'react-icons/fa';
 import { BsLinkedin, BsFacebook, BsTwitter, BsGoogle, BsGithub } from 'react-icons/bs';
 
