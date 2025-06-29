@@ -38,7 +38,7 @@ const Dashboard = () => {
             <NavItem icon={<Home />} label="Home" collapsed={collapsed} />
           </div>
           <div onClick={()=>setActiveSection('joblist')}>
-            <NavItem icon={<Eye />} label="View JobList" collapsed={collapsed} />
+            <NavItem icon={<Eye />} label="Company List" collapsed={collapsed} />
           </div>
           <div onClick={() => setActiveSection('addjobs')}>
             <NavItem icon={<Plus />} label="Add Job" collapsed={collapsed} />
@@ -164,7 +164,7 @@ const JobListSection = () => {
   return (
     <>
       <div className="p-4">
-      <h1 className="text-black text-xl font-bold mb-4">Job List</h1>
+      <h1 className="text-black text-xl font-bold mb-4">Company List</h1>
       <table className="min-w-full table-auto border border-gray-300">
         <thead className="bg-black">
           <tr>
