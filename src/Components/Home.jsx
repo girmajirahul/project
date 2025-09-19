@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   const filteredJobs = jobs.filter((job) =>
-    job.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    job.company_name.toLowerCase().includes(searchQuery.toLowerCase()) &&
     job.post.toLowerCase().includes(postQuery.toLowerCase())
   );
 
