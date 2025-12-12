@@ -178,7 +178,7 @@ const JobListSection = () => {
           {joblist.map((job) => (
             <tr key={job.id}>
               <td className="border text-black border-gray-300 px-4 py-2">{job.id}</td>
-              <td className="border text-black border-gray-300 px-4 py-2">{job.name}</td>
+              <td className="border text-black border-gray-300 px-4 py-2">{job.company_name}</td>
               <td className="border text-black border-gray-300 px-4 py-2">{job.post}</td>
               <td className="border text-black border-gray-300 px-4 py-2">{job.location}</td>
           </tr>

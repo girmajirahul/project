@@ -21,10 +21,10 @@ export default function AdminLogin() {
             const response= await axios.post('http://localhost:8081/admin/adminlogin',{
                  email,password
             });
-            const {success,user}=response.data;
+            const {success,token}=response.data;
             if(success){
                 setAlert({message:'Login Successful !',type:'success'});
-                localStorage.setItem("adminUser",JSON.stringify(user));
+                localStorage.setItem("adminUser",JSON.stringify(token));
                 window.location.href='/admin/dashboard';
             }else{
                 setAlert({message:'Wrong email or Password ',type:'error'});

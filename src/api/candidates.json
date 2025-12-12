@@ -27,16 +27,29 @@
       "website":"/pdf/Mosin_Balsing.pdf"
     },
     {
-      "name": "Dayanand Jagtap",
+      "name": "Akshata Jadhav",
       "id": "103",
-      "image":"candidate3.jpg", 
-      "email":"jagtapdayanand@gmail.com",
+      "image":" ", 
+      "email":"akshatajadhav@gmail.com",
       "age":22,
-      "phone":"9876543211",
-       "role":"Software Engineer",
+      "phone":"123445657",
+       "role":"Python developer",
       "description":"",
-      "skills": ["NodeJS ","ReactJS ","Python "],
+      "skills": ["HTML ","ReactJS ","Python "],
       "location":"Pune",
-      "website":"/pdf/Dayanand_Jagtap.pdf"
+      "website":"/"
+    },
+    {
+      "name": "Sneha Ohal",
+      "id": "104",
+      "image":"sneha.jpg", 
+      "email":"snehaohal@gmail.com",
+      "age":22,
+      "phone":"123445657",
+       "role":"MERN stack developer",
+      "description":"",
+      "skills": ["HTML ","ReactJS ","NodeJS ","MongoDB ","ExpressJs "],
+      "location":"Pune",
+      "website":"/pdf/Sneha_Resume.pdf"
     }
 ]    

@@ -37,7 +37,7 @@ export default function Navbar() {
           <li className="cursor-pointer hover:text-sky-500"><a href="/">HOME</a></li>
           <li className="cursor-pointer hover:text-sky-500"><a href="/About">ABOUT</a></li>
           <li className="cursor-pointer hover:text-sky-500"><a href="/Candidates">CANDIDATES</a></li>
-          <li className="cursor-pointer hover:text-sky-500"><a href="/admin/login">Admin</a></li>
+          <li className="cursor-pointer hover:text-sky-500"><a href="/admin/login">ADMIN</a></li>
           <li>
             {user ? (
               <div className="flex flex-col md:flex-row items-center gap-4">

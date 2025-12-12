@@ -5,9 +5,19 @@ import Card from './Card';
 export default function Candidates() {
   
 const [searchQuery,setSearchQuery]=useState("");
-const filteredCand = candData.filter((cand) =>
-  cand.name.toLowerCase().includes(searchQuery.toLowerCase())
-);
+const [submittedQuery,setSubmittedQuery]=useState("");
+
+const handleSearch=(e)=>{
+  e.preventDefault();
+  setSubmittedQuery(searchQuery);
+}
+
+const filteredCand =
+    submittedQuery.trim() === ""
+      ? candData
+      : candData.filter((cand) =>
+          cand.name.toLowerCase().includes(submittedQuery.toLowerCase()) 
+        );
   return (
     <div>
       <div className="flex flex-wrap ">
@@ -18,11 +28,12 @@ const filteredCand = candData.filter((cand) =>
                 <input type="text" name="search-keyword" 
                   value={searchQuery}
                   onChange={(e)=>setSearchQuery(e.target.value)}                  className='h-10 w-80 mx-10 my-7 bg-amber-50 text-center border-1 border-indigo-500 rounded-md'
-                  placeholder='keywords' />
+                  placeholder='Search ...' />
               </div>
              
               <div className='pt-7'>
-                <button className='h-10 w-30  bg-sky-500 text-white rounded-md hover:bg-blue-600'>SEARCH</button>
+                <button className='h-10 w-30  bg-sky-500 text-white rounded-md hover:bg-blue-600'
+                onClick={handleSearch}>SEARCH</button>
               </div>
             </div>
           </form>

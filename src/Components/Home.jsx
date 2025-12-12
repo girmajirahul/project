@@ -9,8 +9,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [postQuery, setPostQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const [postQuery, setPostQuery] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8081/jobs")
@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   const filteredJobs = jobs.filter((job) =>
-    job.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    job.company_name.toLowerCase().includes(searchQuery.toLowerCase()) &&
     job.post.toLowerCase().includes(postQuery.toLowerCase())
   );
 
@@ -32,7 +32,7 @@ export default function Home() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    arrows: true,
+  
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },
       { breakpoint: 768, settings: { slidesToShow: 1 } },
@@ -50,7 +50,7 @@ export default function Home() {
           <h1 className='text-center text-white text-4xl sm:text-5xl pt-10 sm:pt-20'>
             Your Career Starts Now
           </h1>
-          <form action='#' method='get' className='w-full max-w-5xl px-4'>
+          {/* <form action='#' method='get' className='w-full max-w-5xl px-4'>
             <div className='w-full flex flex-col md:flex-row justify-around items-center pt-5 md:pt-10 gap-4'>
               <input
                 type='text'
@@ -76,7 +76,7 @@ export default function Home() {
                 SEARCH
               </button>
             </div>
-          </form>
+          </form> */}
         </div>
 
         {/* WhatsApp Button */}
@@ -97,7 +97,7 @@ export default function Home() {
        <div className="mt-2"> 
          <h2 className='text-center pt-5 font-bold font-serif text-2xl'>Companies</h2>
        </div>
-        <div className=" bg-blue-200 flex flex-wrap items-center mt-1">
+        {/* <div className=" flex flex-wrap items-center mt-1"> */}
           <div className="p-4 w-full">
             <ul className="flex flex-wrap gap-6 justify-center">
               {filteredJobs.length > 0 ? (
@@ -130,7 +130,7 @@ export default function Home() {
               )}
             </ul>
           </div>
-        </div>
+        {/* </div> */}
       </section>
     </div>
   );
