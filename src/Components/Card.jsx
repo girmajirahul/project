@@ -9,7 +9,7 @@ export default function Card({ data, type }) {
   console.log(data);
   const navigate=useNavigate();
   return (
-    <div className="ml-20 rounded-lg shadow-2xl overflow-hidden p-7">
+    <div className="ml-10 rounded-lg shadow-2xl overflow-hidden p-7">
      
      {type==="candidate" &&(
         <>
