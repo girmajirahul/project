@@ -3,44 +3,51 @@ import candData from '../api/candidates.json';
 import Card from './Card';
 
 export default function Candidates() {
-  
-const [searchQuery,setSearchQuery]=useState("");
-const [submittedQuery,setSubmittedQuery]=useState("");
 
-const handleSearch=(e)=>{
-  e.preventDefault();
-  setSubmittedQuery(searchQuery);
-}
+  const [searchQuery, setSearchQuery] = useState("");
+  const [submittedQuery, setSubmittedQuery] = useState("");
 
-const filteredCand =
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSubmittedQuery(searchQuery);
+  }
+
+  const filteredCand =
     submittedQuery.trim() === ""
       ? candData
       : candData.filter((cand) =>
-          cand.name.toLowerCase().includes(submittedQuery.toLowerCase()) 
-        );
+        cand.name.toLowerCase().includes(submittedQuery.toLowerCase())
+      );
   return (
     <div>
-      <div className="flex flex-wrap ">
-      <form action="#" method='get'>
-            <div className='flex flex-wrap pt-10'>
-              <div className=''>
-                <label htmlFor="search-keyword"></label>
-                <input type="text" name="search-keyword" 
-                  value={searchQuery}
-                  onChange={(e)=>setSearchQuery(e.target.value)}                  className='h-10 w-80 mx-10 my-7 bg-amber-50 text-center border-1 border-indigo-500 rounded-md'
-                  placeholder='Search ...' />
-              </div>
-             
-              <div className='pt-7'>
-                <button className='h-10 w-30  bg-sky-500 text-white rounded-md hover:bg-blue-600'
-                onClick={handleSearch}>SEARCH</button>
-              </div>
-            </div>
-          </form>
+      <div className="flex justify-center w-full px-4">
+        <form onSubmit={handleSearch} className="w-full max-w-lg">
+          <div className="flex flex-col md:flex-row items-center gap-4 pt-10">
+
+            {/* Input */}
+            <input
+              type="text"
+              name="search-keyword"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-10 w-full md:w-80 bg-amber-50 text-center border border-indigo-500 rounded-md px-3"
+              placeholder="Search..."
+            />
+
+            {/* Button */}
+            <button
+              type="submit"
+              className="h-10 w-full md:w-auto px-6 bg-sky-500 text-white rounded-md hover:bg-blue-600"
+            >
+              SEARCH
+            </button>
+          </div>
+        </form>
       </div>
+
       <div className='flex flex-wrap items-center'>
-       <div className="p-4 items-center">
-          <ul className="flex flex-wrap gap-6">
+        <div className="pt-2">
+          <ul className="flex flex-wrap gap-2">
             {filteredCand && filteredCand.length > 0 ? (
               filteredCand.map((curElem) => (
                 <li key={curElem.id} className="list-none">
@@ -53,7 +60,7 @@ const filteredCand =
           </ul>
         </div>
 
-    </div>
+      </div>
     </div>
   )
 }
