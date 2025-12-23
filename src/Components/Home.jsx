@@ -19,10 +19,7 @@ export default function Home() {
       .catch(err => console.log(err));
   }, []);
 
-  const filteredJobs = jobs.filter((job) =>
-    job.company_name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    job.post.toLowerCase().includes(postQuery.toLowerCase())
-  );
+  
 
   const settings = {
     dots: false,
@@ -100,8 +97,8 @@ export default function Home() {
         {/* <div className=" flex flex-wrap items-center mt-1"> */}
           <div className="p-4 w-full">
             <ul className="flex flex-wrap gap-6 justify-center">
-              {filteredJobs.length > 0 ? (
-                filteredJobs.map((job) => (
+              {jobs.length > 0 ? (
+                jobs.map((job) => (
                   <li key={job.id} className="list-none">
                     <Card data={job} type="job" />
                   </li>

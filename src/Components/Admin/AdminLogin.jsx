@@ -24,7 +24,7 @@ export default function AdminLogin() {
             const {success,token}=response.data;
             if(success){
                 setAlert({message:'Login Successful !',type:'success'});
-                localStorage.setItem("adminUser",JSON.stringify(token));
+                localStorage.setItem("adminUser",token);
                 window.location.href='/admin/dashboard';
             }else{
                 setAlert({message:'Wrong email or Password ',type:'error'});

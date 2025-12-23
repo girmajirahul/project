@@ -152,14 +152,23 @@ const HomeSection = () => {
 
 const JobListSection = () => {
   const [joblist,setJobList]=useState([]);
-  useEffect(()=>{
-     
-    fetch("http://localhost:8081/jobs")
-     .then(res=>res.json())
-     .then(data=>setJobList(data))
-     .catch(err=>console.log(err))
-   
-    },[])
+  useEffect(() => {
+  const token = localStorage.getItem("adminUser"); // or wherever you store it
+  
+  axios.get("http://localhost:8081/admin/getjobs", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  .then(response => {
+    setJobList(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+}, []);
+
    
   return (
     <>
