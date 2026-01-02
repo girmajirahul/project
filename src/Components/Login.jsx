@@ -2,22 +2,18 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import image from '/img/login-image.jpg';
 import Alert from "./Alert";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [showSignup, setShowSignup] = useState(false);
   const [values, setValues] = useState({ name: "", email: "", password: "" });
-  const [users, setUsers] = useState([]);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState({ message: '', type: '' });
 
-  useEffect(() => {
-    fetch("http://localhost:8081/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((err) => console.log(err));
-  }, []);
-
+  const navigate=useNavigate()
+  
   // Auto-clear alert after 5 seconds
   useEffect(() => {
     if (alert.message) {
@@ -42,21 +38,30 @@ export default function Login() {
       );
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const user = users.find((u) => u.email === email);
-    if (user) {
-      if (user.password === password) {
-        setAlert({ message: "Login Successfully!", type: "success" });
-        localStorage.setItem("currentuser", JSON.stringify(user));
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 1500);
-      } else {
-        setAlert({ message: "Invalid password", type: "error" });
+    try{
+      const res=await axios.post('http://localhost:8081/users/login',{
+        email,
+        password,
+      })
+
+      if(res.data.success){
+        setAlert({message:"Login successfully ",type:"success"})
+        localStorage.setItem("token",res.data.token)
+       localStorage.setItem("currentUser",JSON.stringify(res.data.user))
+        setTimeout(()=>{
+         navigate("/")
+        },1500)
+      }else{
+        setAlert({message:res.data.message,type:"error"})
       }
-    } else {
-      setAlert({ message: "Login failed. User not found.", type: "error" });
+
+    }catch(err){
+      setAlert({
+        message:err.response?.data?.message || "server error",
+        type:"error"
+      })
     }
   };
 
