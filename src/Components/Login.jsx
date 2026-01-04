@@ -1,175 +1,152 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import image from '/img/login-image.jpg';
-import Alert from "./Alert";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import Alert from "./Alert";
 
 export default function Login() {
   const [showSignup, setShowSignup] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({ name: "", email: "", password: "" });
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alert, setAlert] = useState({ message: '', type: '' });
+  const [alert, setAlert] = useState({ message: "", type: "" });
 
-  const navigate=useNavigate()
-  
-  // Auto-clear alert after 5 seconds
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (alert.message) {
-      const timer = setTimeout(() => setAlert({ message: '', type: '' }), 5000);
+      const timer = setTimeout(() => setAlert({ message: "", type: "" }), 4000);
       return () => clearTimeout(timer);
     }
   }, [alert]);
 
-  const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    axios
-      .post("http://localhost:8081/users/signup", values)
-      .then(() =>
-        setAlert({ message: "Registered Successfully!", type: "success" })
-      )
-      .catch(() =>
-        setAlert({ message: "Registration failed. Try again.", type: "error" })
-      );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:8081/users/signup", values);
+      setAlert({ message: "Signup successful", type: "success" });
+      setShowSignup(false);
+    } catch {
+      setAlert({ message: "Signup failed", type: "error" });
+    }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try{
-      const res=await axios.post('http://localhost:8081/users/login',{
-        email,
-        password,
-      })
-
-      if(res.data.success){
-        setAlert({message:"Login successfully ",type:"success"})
-        localStorage.setItem("token",res.data.token)
-       localStorage.setItem("currentUser",JSON.stringify(res.data.user))
-        setTimeout(()=>{
-         navigate("/")
-        },1500)
-      }else{
-        setAlert({message:res.data.message,type:"error"})
+    try {
+      const res = await axios.post("http://localhost:8081/users/login", { email, password });
+      if (res.data.success) {
+        setAlert({ message: "Login successful", type: "success" });
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("currentUser", JSON.stringify(res.data.user));
+        setTimeout(() => navigate("/"), 1200);
+      } else {
+        setAlert({ message: res.data.message, type: "error" });
       }
-
-    }catch(err){
-      setAlert({
-        message:err.response?.data?.message || "server error",
-        type:"error"
-      })
+    } catch (err) {
+      setAlert({ message: err.response?.data?.message || "Server error", type: "error" });
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      {alert.message && (
-        <Alert
-          message={alert.message}
-          type={alert.type}
-          onClose={() => setAlert({ message: '', type: '' })}
-        />
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      {alert.message && <Alert {...alert} onClose={() => setAlert({ message: "", type: "" })} />}
 
-      <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden w-[85%] max-w-4xl">
-        <div
-          className="hidden md:block md:w-1/2 bg-cover bg-center"
-          style={{ backgroundImage: `url(${image})` }}
-        ></div>
-        <div className="w-[85%] md:w-1/2 p-6">
-          {!showSignup ? (
-            <div className='pt-1 pb-8'>
-              <div className="pt-8 pb-8 text-center shadow-xl shadow-blue-300">
-                <div className="text-center bg-cyan-400 h-20 rounded-t-md pt-7 text-2xl text-white">
-                  <h4>LOGIN TO CARIERA</h4>
-                </div>
-                <form onSubmit={handleLogin} className="space-y-4 pt-2">
-                  <input
-                    type="text"
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    className='h-10 w-[85%] border bg-amber-50 pl-2 rounded-md'
-                    placeholder='example@gmail.com'
-                  />
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    className='h-10 w-[85%] border bg-amber-50 pl-2 rounded-md'
-                    placeholder='Password'
-                  />
-                  <button
-                    type="submit"
-                    className="h-10 w-[85%] bg-cyan-500 py-2 px-3 text-white rounded-md"
-                  >
-                    Login
-                  </button>
-                  <div className='text-center py-2'>
-                    <label>Don't have an account?</label>
-                    <button
-                      type="button"
-                      onClick={() => setShowSignup(true)}
-                      className="text-blue-500 hover:underline ml-2"
-                    >
-                      Signup
-                    </button>
-                  </div>
-                </form>
-              </div>
+      <div className="bg-white w-full max-w-md rounded-xl shadow-xl p-8">
+        <h2 className="text-3xl font-bold text-center text-gray-800">
+          {showSignup ? "Create Account" : "Welcome Back"}
+        </h2>
+        <p className="text-center text-sm text-gray-500 mb-6">
+          {showSignup ? "Sign up to get started" : "Login to continue"}
+        </p>
+
+        {!showSignup ? (
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full h-11 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full h-11 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 text-gray-500"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
-          ) : (
-            <div>
-              <div className="pt-1 pb-8 text-center shadow-xl shadow-blue-300">
-                <div className="text-center bg-cyan-400 h-20 rounded-t-md pt-7 text-2xl text-white">
-                  <h4>SIGNUP FOR CARIERA</h4>
-                </div>
-                <form onSubmit={handleSubmit} className="space-y-4 pt-2">
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={handleChange}
-                    className='h-10 w-[85%] border bg-amber-50 pl-2 rounded-md'
-                    placeholder='Full Name'
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    className='h-10 w-[85%] border bg-amber-50 pl-2 rounded-md'
-                    placeholder='example@gmail.com'
-                  />
-                  <input
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    className='h-10 w-[85%] border bg-amber-50 pl-2 rounded-md'
-                    placeholder='Password'
-                  />
-                  <div className="text-center py-2">
-                    <button
-                      type="submit"
-                      className="h-10 w-[85%] bg-cyan-500 py-2 px-3 text-white rounded-md"
-                    >
-                      Signup
-                    </button>
-                    <label htmlFor="" className="block">Already have account</label>
-                    <button
-                      type="button"
-                      onClick={() => setShowSignup(false)}
-                      className="text-blue-500 hover:underline"
-                    >
-                      Login
-                    </button>
-                  </div>
-                </form>
-              </div>
+
+            <button className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold">
+              Login
+            </button>
+
+            <p className="text-center text-sm">
+              Don’t have an account?
+              <button type="button" onClick={() => setShowSignup(true)} className="text-blue-600 ml-1 font-medium">
+                Sign up
+              </button>
+            </p>
+          </form>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              onChange={handleChange}
+              className="w-full h-11 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleChange}
+              className="w-full h-11 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+            <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              className="w-full h-11 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+             <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 text-gray-500"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
-          )}
-        </div>
+
+            <button className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold">
+              Create Account
+            </button>
+
+            <p className="text-center text-sm">
+              Already have an account?
+              <button type="button" onClick={() => setShowSignup(false)} className="text-blue-600 ml-1 font-medium">
+                Login
+              </button>
+            </p>
+          </form>
+        )}
       </div>
     </div>
   );
