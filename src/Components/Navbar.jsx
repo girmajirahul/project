@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, User, X } from 'lucide-react';
 import logo from '../assets/logo.svg';
+import { useAuth } from '../Context/AuthContext';
 
 export default function Navbar() {
-  const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const  {user,logout}=useAuth();
 
-  const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    setUser(null);
-    setProfileOpen(false);
-    window.location.href = "/login";
-  };
+  
 
   return (
     <div className="relative w-full p-6 flex items-center justify-between shadow-2xl bg-white">
@@ -84,7 +74,7 @@ export default function Navbar() {
                         <a href={`/profile/${user.id}`}>Edit Profile</a>
                       </li>
                       <li
-                        onClick={handleLogout}
+                        onClick={logout}
                         className="px-4 py-2 hover:bg-red-100 text-red-600 cursor-pointer"
                       >
                         Logout

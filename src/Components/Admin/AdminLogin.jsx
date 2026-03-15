@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import Alert from '../Alert';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 export default function AdminLogin() {
     // const [values,setValues]=useState({email,password});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState({ message: '', type: '' })
-
+    const navigate=useNavigate()
    
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -18,30 +20,25 @@ export default function AdminLogin() {
 
         
         try{
-            const response= await axios.post('http://localhost:8081/admin/adminlogin',{
+            const response= await axios.post(`${import.meta.env.VITE_BASE_URL}/api/auth/login`,{
                  email,password
             });
             const {success,token}=response.data;
             if(success){
-                setAlert({message:'Login Successful !',type:'success'});
+                toast.success( response.data.message || 'login Successfully done')
                 localStorage.setItem("adminUser",token);
-                window.location.href='/admin/dashboard';
+                navigate('/admin/dashboard')
             }else{
-                setAlert({message:'Wrong email or Password ',type:'error'});
+                toast.error("something went wrong !")
             }
+
         }
         catch(err){
             console.log(err);
-            setAlert({message:'Something went wrong',type:'error'});
+             toast.error("something went wrong !")
         }
     }
 
-    useEffect(() => {
-        if (alert.message) {
-            const timer = setTimeout(() => setAlert({ message: '', type: '' }), 5000);
-            return () => clearTimeout(timer);
-        }
-    }, [alert]);
     return (
         <div className=' flex justify-center items-center min-h-screen ng-grey'>
             {alert.message && (
@@ -83,7 +80,7 @@ export default function AdminLogin() {
                     <div className="pt-4">
                         <button
                             type="submit"
-                            className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-full transition duration-300"
+                            className="w-full bg-blue-900 hover:bg-blue-800 text-white cursor-pointer font-semibold py-2 px-4 rounded-full transition duration-300"
                         >
                             Login
                         </button>

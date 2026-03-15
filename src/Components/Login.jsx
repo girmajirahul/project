@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import Alert from "./Alert";
+import { useAuth } from "../Context/AuthContext";
 
 export default function Login() {
   const [showSignup, setShowSignup] = useState(false);
@@ -36,22 +37,27 @@ export default function Login() {
     }
   };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:8081/users/login", { email, password });
-      if (res.data.success) {
-        setAlert({ message: "Login successful", type: "success" });
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("currentUser", JSON.stringify(res.data.user));
-        setTimeout(() => navigate("/"), 1200);
-      } else {
-        setAlert({ message: res.data.message, type: "error" });
-      }
-    } catch (err) {
-      setAlert({ message: err.response?.data?.message || "Server error", type: "error" });
+const { login } = useAuth();
+
+const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
+      { email, password }
+    );
+
+    if (res.data.token) {
+      login(res.data.data, res.data.token);
+      navigate("/");
     }
-  };
+
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
