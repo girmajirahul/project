@@ -18,6 +18,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import HomeSection from "./Components/Admin/pages/Home";
 import JobListSection from "./Components/Admin/pages/JobList";
 import UserList from "./Components/Admin/pages/Users";
+import Not404Page from "./Components/PageNotFound";
 
 const App = () => {
   const location = useLocation();
@@ -48,15 +49,14 @@ const App = () => {
 
         {/* Dashboard Layout */}
         <Route path="/admin/dashboard" element={<Dashboard />}>
-
           <Route index element={<HomeSection />} />
           <Route path="joblist" element={<JobListSection />} />
           <Route path="userList" element={<UserList />} />
-
-
         </Route>
 
+        <Route path="*" element={<Not404Page />} />
       </Routes>
+
 
       {!hideLayout && <Footer />}
     </>
